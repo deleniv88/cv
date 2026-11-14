@@ -13,4 +13,4 @@ jobs:
         run: |
           D=$(printf '%s' "$D" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
           echo "FTP_DIR length: ${#D}; starts with domains: $([[ "$D" == /domains* || "$D" == domains* ]] && echo yes || echo no)"
-          lftp -u "$U","$P" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; rm -f /.htaccess /index.html /andrii.jpg /Andrii-Deleniv-CV.pdf /.ftp-deploy-sync-state.json; rm -rf /work; echo ---root-after; cls -1a /; quit" "$S" 2>&1
+          lftp -u "$U","$P" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; echo ---cv; cls -1a /cv.deweb.studio/ /cv.deweb.studio/work/; quit" "$S" 2>&1
