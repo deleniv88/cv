@@ -28,6 +28,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ steps.dir.outputs.path }}
+          server-dir: /cv.deweb.studio/   # = /public_html/cv.deweb.studio у панелі LH
           local-dir: ./site/
           protocol: ftps
