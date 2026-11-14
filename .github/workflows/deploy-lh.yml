@@ -1,0 +1,25 @@
+name: deploy-lh
+# Пуш у main → файли сайту по FTP на lh.pl (cv.deweb.studio), як для deweb.studio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency: deploy-lh
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare files
+        run: |
+          mkdir site
+          cp -r index.html andrii.jpg Andrii-Deleniv-CV.pdf work .htaccess site/
+      - name: FTP → lh.pl
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR }}
+          local-dir: ./site/
+          protocol: ftps
