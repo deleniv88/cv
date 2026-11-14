@@ -14,12 +14,19 @@ jobs:
         run: |
           mkdir site
           cp -r index.html andrii.jpg Andrii-Deleniv-CV.pdf work .htaccess site/
+      - name: Normalize FTP_DIR
+        id: dir
+        env:
+          D: ${{ secrets.FTP_DIR }}
+        run: |
+          D="${D%/}/"; case "$D" in /*) ;; *) D="/$D";; esac
+          echo "path=$D" >> "$GITHUB_OUTPUT"
       - name: FTP → lh.pl
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_DIR }}
+          server-dir: ${{ steps.dir.outputs.path }}
           local-dir: ./site/
           protocol: ftps
