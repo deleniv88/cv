@@ -1,0 +1,8 @@
+# cv.deweb.studio — LH.pl (Apache)
+RewriteEngine On
+RewriteRule ^cv\.pdf$ Andrii-Deleniv-CV.pdf [L]
+RewriteRule ^pdf$ Andrii-Deleniv-CV.pdf [L]
+<FilesMatch "\.pdf$">
+  ForceType application/pdf
+  Header set Content-Disposition "attachment; filename=\"Andrii-Deleniv-CV.pdf\""
+</FilesMatch>
