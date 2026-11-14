@@ -1,0 +1,16 @@
+name: ftp-ls
+on: workflow_dispatch
+jobs:
+  ls:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get install -y lftp >/dev/null
+      - env:
+          S: ${{ secrets.FTP_SERVER }}
+          U: ${{ secrets.FTP_USERNAME }}
+          P: ${{ secrets.FTP_PASSWORD }}
+          D: ${{ secrets.FTP_DIR }}
+        run: |
+          D=$(printf '%s' "$D" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          echo "FTP_DIR length: ${#D}; starts with domains: $([[ "$D" == /domains* || "$D" == domains* ]] && echo yes || echo no)"
+          lftp -u "$U","$P" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; pwd; cls -1 /; echo ---domains; cls -1 /domains/; echo ---cv; cls -1 /domains/cv.deweb.studio/; cls -1 /domains/cv.deweb.studio/public_html/; echo ---target; cd \"$D\"; pwd; cls -1; quit" "$S" 2>&1 | sed "s#$D#<FTP_DIR>#g"
