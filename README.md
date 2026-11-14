@@ -15,6 +15,5 @@ Static CV site (Vercel).
 | `FTP_SERVER` | FTP-сервер lh.pl (той самий, що для deweb.studio) |
 | `FTP_USERNAME` | логін FTP |
 | `FTP_PASSWORD` | пароль FTP |
-| `FTP_DIR` | папка піддомену, зі слешем у кінці, напр. `/domains/cv.deweb.studio/public_html/` |
 
-Якщо падає з помилкою TLS — у `.github/workflows/deploy-lh.yml` заміни `protocol: ftps` на `protocol: ftp`.
+Папка на сервері: `/cv.deweb.studio/` (у панелі LH: `/public_html/cv.deweb.studio`). Заливка — `lftp mirror`.
