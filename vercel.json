@@ -1,15 +1,31 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/cv.pdf", "destination": "/Andrii-Deleniv-CV.pdf" },
-    { "source": "/pdf", "destination": "/Andrii-Deleniv-CV.pdf" }
+    {
+      "source": "/cv.pdf",
+      "destination": "/Andrii-Deleniv-CV.pdf"
+    },
+    {
+      "source": "/pdf",
+      "destination": "/Andrii-Deleniv-CV.pdf"
+    },
+    {
+      "source": "/wp-seo.pdf",
+      "destination": "/Andrii-Deleniv-CV-WordPress-SEO.pdf"
+    }
   ],
   "headers": [
     {
-      "source": "/(Andrii-Deleniv-CV.pdf|cv.pdf|pdf)",
+      "source": "/(.*\\.pdf|pdf)",
       "headers": [
-        { "key": "Content-Disposition", "value": "attachment; filename=\"Andrii-Deleniv-CV.pdf\"" },
-        { "key": "Content-Type", "value": "application/pdf" }
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        }
       ]
     }
   ]
